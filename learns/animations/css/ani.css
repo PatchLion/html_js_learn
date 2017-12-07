@@ -1,0 +1,8 @@
+@keyframes ani_width {
+    from {
+        width: 0px;
+    }
+    to {
+        width: 100px;
+    }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        div {
+            width: 300px;
+            height: 100px;
+            background: red;
+            position: relative;
+            animation: mymove 5s infinite;
+            animation-direction: alternate;
+            -moz-animation: mymove 5s infinite;
+            -webkit-animation: mymove 5s infinite;
+            -webkit-animation-direction: alternate;
+            -o-animation: mymove 5s infinite;
+        }
+
+        @keyframes mymove {
+            from {
+                top: 0px;
+            }
+            to {
+                top: 200px;
+            }
+        }
+
+        @-moz-keyframes mymove {
+            from {
+                top: 0px;
+            }
+            to {
+                top: 200px;
+            }
+        }
+
+        @-webkit-keyframes mymove {
+            from {
+                top: 0px;
+            }
+            to {
+                top: 200px;
+            }
+        }
+
+        @-o-keyframes mymove {
+            from {
+                top: 0px;
+            }
+            to {
+                top: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        some text
+        <p>Some more text.</p>
+    </div>
+</body>
+
+</html>

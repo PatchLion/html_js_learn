@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background: lightgray;
+        }
+
+        #container {
+            background: lightcyan;
+        }
+
+        #header {
+            border-bottom: 3px solid #f60;
+            height: 30px;
+        }
+
+        #header li {
+            font-weight: bolder;
+            float: left;
+            height: 30px;
+            width: 80px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        #header li:hover {
+            cursor: pointer;
+        }
+
+        #header .sec {
+            background: #f60;
+            color: white;
+        }
+
+        #listContent li {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #tips {
+            width: 400px;
+            position: absolute;
+            border: 2px solid #f70;
+            background-color: white;
+            display: none;
+        }
+
+        #tips li {
+            list-style: none;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #tips li.col {
+            width: 180px;
+            height: 30px;
+            float: left;
+            line-height: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+    <script type="text/javascript" src="./datas.js"></script>
+    <script>
+        window.onload = function () {
+            //tab标签
+            var vUl = document.getElementById("header");
+            var vJobsContent = document.getElementById("listContent");
+            var vTips = document.getElementById("tips");
+
+            for (var i = 0; i < data.length; i++) {
+                vUl.innerHTML += "<li>" + data[i].name + "</li>";
+            }
+            var lis = vUl.getElementsByTagName("li");
+            lis[0].className = "sec";
+
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].index = i
+                lis[i].onclick = function () {
+                    vJobsContent.innerHTML = "";
+                    vTips.innerHTML = "";
+                    headItemSelected(this.index);
+                    switchJobs(this.index);
+                }
+            }
+
+            switchJobs(0);
+
+            //切换类型
+            function headItemSelected(index) {
+                for (var i = 0; i < lis.length; i++) {
+                    //alert("A: " + i + " B: " + index);
+                    if (index === i) {
+                        lis[i].className = "sec";
+                    } else {
+                        lis[i].className = "";
+                    }
+                }
+            }
+
+            //切换职位
+            function switchJobs(index) {
+                var jobs = data[index];
+
+                for (var i = 0; i < jobs.list.length; i++) {
+                    var ul = document.createElement("ul");
+                    var li = document.createElement("li");
+                    var a = document.createElement("a");
+                    a.innerHTML = jobs.list[i].title;
+                    a.href = "javascript:;";
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                    vJobsContent.appendChild(ul);
+                    a.index = i;
+
+                    var h4 = document.createElement("h4");
+                    var lis1 = document.createElement('li');
+                    lis1.className = 'col';
+                    var lis2 = document.createElement('li');
+                    lis2.className = 'col';
+                    var lis3 = document.createElement('li');
+                    lis3.className = 'col';
+                    var lis4 = document.createElement('li');
+                    lis4.className = 'col';
+                    var lis5 = document.createElement('li');
+                    lis5.className = 'col';
+                    var lis6 = document.createElement('li');
+                    lis6.className = 'col';
+
+
+                    a.onmouseover = function () {
+                        lis1.innerHTML = jobs.list[this.index].recruitingNumbers;
+                        lis2.innerHTML = jobs.list[this.index].workingLocation;
+                        lis3.innerHTML = jobs.list[this.index].workExperience;
+                        lis4.innerHTML = jobs.list[this.index].education;
+                        lis5.innerHTML = jobs.list[this.index].wage;
+                        lis6.innerHTML = jobs.list[this.index].addDate;
+                        h4.innerHTML = jobs.list[this.index].company;
+                        vTips.appendChild(h4);
+                        vTips.appendChild(lis1);
+                        vTips.appendChild(lis2);
+                        vTips.appendChild(lis3);
+                        vTips.appendChild(lis4);
+                        vTips.appendChild(lis5);
+                        vTips.appendChild(lis6);
+                        vTips.style.display = "block";
+                        vTips.style.left = vJobsContent.offsetLeft + this.offsetWidth + 10 + 'px';
+                        vTips.style.top = this.offsetTop + this.scrollTop + 'px';
+                    }
+
+                    a.onmouseout = function () {
+                        vTips.style.display = "none";
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="header"></ul>
+        <div id="listContent"></div>
+    </div>
+    <div id="tips">
+        <span id="arrow"></span>
+        <div id="tipsContent"></div>
+    </div>
+</body>
+
+</html>

@@ -210,20 +210,22 @@
                     else if( b > 0){
                         var newarr = cArr.splice(0, b);
                         cArr = $.merge(cArr, newarr);
-                        $("li").each(function(i, e){
+                                $("li").each(function(i, e){
                             $(e).removeClass().addClass(cArr[i]);
                         });
                         index = myindex;
                         show();
                     }
                     else if(b<0){
-                        // var oldarr = cArr.splice(b, -b);
-                        // cArr = $.merge(cArr, oldarr);
-                        // $("li").each(function(i, e){
-                        //     $(e).removeClass().addClass(cArr[i]);
-                        // });
-                        // index = myindex;
-                        // show();
+                        cArr.reverse();
+                        var oldarr=cArr.splice(0,-b)
+                        cArr=$.merge(cArr,oldarr);
+                        cArr.reverse();
+                        $("li").each(function(i,e){
+                        $(e).removeClass().addClass(cArr[i]);
+                        })
+                        index=myindex;
+                        show();
                     }
                 })
             });

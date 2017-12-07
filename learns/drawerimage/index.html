@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        #container {
+            width: 300px;
+            height: 1000px;
+            background-color: lightsteelblue;
+            margin: 0 auto;
+        }
+
+        #list {
+            list-style: none;
+        }
+
+        #list img {
+            width: 300px;
+            height: 250px;
+        }
+
+        #list li {
+            line-height: 40px;
+            height: 40px;
+            background: #efefef;
+            margin-bottom: 3px;
+            cursor: pointer;
+            overflow: hidden;
+            -webkit-transition: height 0.3s ease;
+            -moz-transition: height 0.3s ease;
+            -ms-transition: height 0.3s ease;
+            -o-transition: height 0.3s ease;
+            transition: height 0.3s ease;
+        }
+
+        #list li a {
+            text-decoration: none;
+        }
+
+
+        #list li:hover a {
+            color: #fff;
+        }
+
+        #list li:hover {
+            background-color: #f36;
+            height: 240px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="list">
+            <li>
+                <a href="#">国际美妆抢先看</a>
+                <img src="images/1.jpg" />
+            </li>
+            <li>
+                <a href="#">女神标准大讨论</a>
+                <img src="images/2.jpg" />
+            </li>
+            <li>
+                <a href="#">吃货也能越吃越瘦</a>
+                <img src="images/3.jpg" />
+            </li>
+            <li>
+                <a href="#">连衣裙抢头条</a>
+                <img src="images/4.jpg" />
+            </li>
+            <li>
+                <a href="#">宫三女主美妆对决</a>
+                <img src="images/5.jpg" />
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

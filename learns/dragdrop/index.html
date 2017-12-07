@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            position: relative;
+        }
+
+
+        #planearea {
+            height: 130px;
+            background-color: #bbb;
+            text-align: center;
+            line-height: 130px;
+        }
+
+        #trasharea {
+            margin-top: 10px;
+            text-align: center;
+            line-height: 130px;
+        }
+
+        #plane1,
+        #plane2,
+        #plane3 {
+            cursor: pointer;
+        }
+
+        .sec {
+            border: 2px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var planes = $("#planearea>img");
+            for (var i = 0; i < planes.length; i++) {
+                planes[i].index = i;
+                planes[i].onclick = function () {
+                    for (var j = 0; j < planes.length; j++) {
+                        planes[j].className = "";
+                    }
+                    this.className = "sec";
+                }
+                planes[i].ondragstart = function (e) {
+                    console.log("src drag start");
+                    e.dataTransfer.setData("PlaneID", this.id);
+                }
+                planes[i].ondrag = function () {
+                    console.log("src drag");
+                }
+                planes[i].ondragend = function () {
+                    console.log("src drag end");
+                }
+
+            }
+
+            //垃圾桶
+            var vtrash = $("#trash");
+
+            vtrash[0].ondragenter = function (e) {
+                console.log("drag enter");
+                vtrash[0].style.opacity = "0.2";
+            }
+
+            vtrash[0].ondragleave = function (e) {
+                console.log("drag leave");
+                vtrash[0].style.opacity = "1.0";
+            }
+
+            vtrash[0].ondragover = function (e) {
+                e.preventDefault();
+            }
+
+            vtrash[0].ondrop = function (e) {
+                console.log("drop");
+                vtrash[0].style.opacity = "1.0";
+                var id = e.dataTransfer.getData("PlaneID");
+                var p = document.getElementById(id);
+                p.parentNode.removeChild(p);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="planearea">
+        <img id="plane1" class="sec" src="images/plane1.png" alt="" draggable="true" />
+        <img id="plane2" src="images/plane2.png" alt="" draggable="true" />
+        <img id="plane3" src="images/plane3.png" alt="" draggable="true" />
+    </div>
+    <div id="trasharea">
+        <img id="trash" src="images/trash.png" alt="" draggable="true" />
+    </div>
+</body>
+
+</html>

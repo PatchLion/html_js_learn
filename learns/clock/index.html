@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-color: #666;
+		}
+
+		#clock {
+
+			width: 250px;
+			height: 38px;
+			margin: 50px auto;
+		}
+
+		#clock>img {
+			width: 25px;
+			height: 36px;
+			margin: 0 2px;
+			position: relative;
+			-moz-transition: all 0.120s linear 0s;
+			-webkit-transition: all 0.120s linear 0s;
+			-o-transition: all 0.120s linear 0s;
+			transition: all 0.120s linear 0s;
+		}
+
+		#clock>span {
+			font-size: 50px;
+			color: #aaa;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+
+			Date.prototype.Format = function (fmt) { //author: meizz 
+				var o = {
+					"M+": this.getMonth() + 1, //月份 
+					"d+": this.getDate(), //日 
+					"h+": this.getHours(), //小时 
+					"m+": this.getMinutes(), //分 
+					"s+": this.getSeconds(), //秒 
+					"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+					"S": this.getMilliseconds() //毫秒 
+				};
+				if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for (var k in o)
+					if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" +
+						o[k]).substr(("" + o[k]).length)));
+				return fmt;
+			}
+
+			var i = 0;
+			setInterval(function () {
+				showTime();
+			}, 1000)
+
+			showTime();
+
+			function showTime(){
+				var datetime = new Date();
+				var timeString = datetime.Format('hhmmss');
+
+				var imgs = document.getElementsByTagName("img");
+				//alert(imgs.length)
+				for(var i = 0; i < timeString.length; i++){
+					imgs[i].src="./images/" + timeString[i] + ".png";
+				}
+			}
+		};
+	</script>
+</head>
+
+<body>
+	<div id="clock">
+		<img src="./images/0.png" alt="" />
+		<img src="./images/0.png" alt="" />
+		<span>:</span>
+		<img src="./images/0.png" alt="" />
+		<img src="./images/0.png" alt="" />
+		<span>:</span>
+		<img src="./images/0.png" alt="" />
+		<img src="./images/0.png" alt="" />
+	</div>
+</body>
+
+</html>

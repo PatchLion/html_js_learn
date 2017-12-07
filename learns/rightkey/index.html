@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("images/1.jpg");
+        }
+
+        #menu {
+            background-color: #333;
+            width: 9em;
+            position: absolute;
+            left: 100px;
+            top: 200px;
+            display: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #menu>ul {
+            background-color: #fff;
+            border-radius: 3%;
+            border: 0px;
+        }
+
+        #menu li {
+            color: #333;
+            height: 2em;
+            text-align: left center;
+            line-height: 2em;
+            padding-left: 2.1em;
+            cursor: pointer;
+            border: 0px;
+        }
+
+        #menu li:hover {
+            font-weight: bold;
+            border: 0px;
+        }
+
+        #menu ul li:nth-child(1) {
+            background: url(images/ico5.jpg ) no-repeat 10px center;
+        }
+
+        #menu ul li:nth-child(2) {
+            background: url(images/ico3.jpg ) no-repeat 10px center;
+        }
+
+        #menu img {
+            vertical-align: middle;
+        }
+
+        #backgroundPanel {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            width: 30em;
+            height: 16em;
+            margin: 8.125em auto;
+        }
+
+        #panelHeader {
+            height: 2.4em;
+            background: #333;
+            line-height: 2.4em;
+            text-align: left center;
+            padding-left: 0.5em;
+        }
+
+        #panelHeader>h3 {
+            color: #fff;
+            position: relative;
+            float: left;
+        }
+
+        #close {
+            right: 0.1em;
+            position: relative;
+            top: 0.1em;
+            cursor: pointer;
+            float: right;
+            padding-right: 0.2em;
+            padding-top: 0.2em;
+        }
+
+        #backgroundPanel ul {
+            margin: 0.1em auto;
+        }
+
+        #backgroundPanel ul li {
+            width: 9.51em;
+            height: 6.3em;
+            background: transparent;
+            float: left;
+            padding: 0.1em;
+            margin-left: 0.18em;
+            margin-top: 0.1em;
+        }
+
+        #backgroundPanel ul img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            var body = document.body;
+            var menu = document.getElementById("menu"); //目录
+            var backgroundPanel = document.getElementById("backgroundPanel"); //背景图片面板
+
+
+
+            document.oncontextmenu = function (ev) {
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+                menu.style.display = "block";
+                menu.style.left = ev.clientX + "px";
+                menu.style.top = ev.clientY + scrollTop + "px";
+                return false;
+            }
+
+            //更换背景图
+            var switchBG = document.getElementById("switchBG");
+            switchBG.onclick = function (event) {
+                menu.style.display = "none";
+                backgroundPanel.style.display = "block";
+                event.stopPropagation();
+                return false;
+            }
+
+            //更换背景图关闭按钮
+            var closeButton = document.getElementById("close");
+            closeButton.onclick = function (event) {
+                menu.style.display = "none";
+                backgroundPanel.style.display = "none";
+                event.stopPropagation();
+                return false;
+            }
+
+            //刷新
+            var refresh = document.getElementById("refresh");
+            refresh.onclick = function (event) {
+                menu.style.display = "none";
+                event.stopPropagation();
+                return false;
+            }
+
+            //获取图片列表
+            var imagelist = document.getElementById("imagelist");
+            var imgs = imagelist.getElementsByTagName("img");
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].onclick = function () {
+                    var imgsrc = this.getAttribute("src"); 
+                    document.body.style.backgroundImage = "url(" + imgsrc + ")";
+                }
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="menu">
+        <ul>
+            <li id="switchBG">更换背景图</li>
+            <li id="refresh">刷新</li>
+        </ul>
+    </div>
+
+    <div id="backgroundPanel">
+        <div id="panelHeader">
+            <h3>桌面背景墙</h3>
+            <img src="images/close.png" alt="" id="close" />
+        </div>
+        <ul id="imagelist">
+            <li>
+                <img src="images/1.jpg" alt="" />
+            </li>
+            <li>
+                <img src="images/2.jpg" alt="" />
+            </li>
+            <li>
+                <img src="images/3.jpg" alt="" />
+            </li>
+            <li>
+                <img src="images/4.jpg" alt="" />
+            </li>
+            <li>
+                <img src="images/5.jpg" alt="" />
+            </li>
+            <li>
+                <img src="images/6.jpg" alt="" />
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
